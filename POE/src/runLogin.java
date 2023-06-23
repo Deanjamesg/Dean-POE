@@ -6,6 +6,8 @@ public class runLogin {
 
 	public static void main(String[] args) {
 
+		//This is a test to see if this gets committed!
+
 		/*
 		 * An array list is created to store every new account that is registered
 		 * successfully, whilst the program runs. Creating an object of Login with
