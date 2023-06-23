@@ -251,6 +251,7 @@ public class runLogin {
 
 					case 2: // Change Password
 
+						String tempPassword = accountList.get(index).getPassword();
 						try {
 							accountList.get(index)
 									.setPassword(JOptionPane.showInputDialog("Please enter your new PASSWORD:", null));
@@ -267,6 +268,9 @@ public class runLogin {
 							break;
 
 						} catch (NullPointerException e) {
+							if (accountList.get(index).getPassword() == null) {
+								accountList.get(index).setPassword(tempPassword);
+							}
 							break;
 						}
 					case 3: // Delete Account
