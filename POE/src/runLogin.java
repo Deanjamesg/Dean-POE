@@ -351,6 +351,9 @@ public class runLogin {
 									JOptionPane.showInputDialog(
 											"Please enter the number of tasks you would like to add:"));
 						} catch (NumberFormatException e) {
+							if (totalTasks == null) {
+								
+							}
 							JOptionPane.showMessageDialog(null, "You need to enter a number. \nPlease try again!");
 							break;
 						}
