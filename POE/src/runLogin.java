@@ -1,6 +1,14 @@
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
+/**
+ * Student Name: Dean James Greeff
+ * Student Number: ST10378305
+ * Varsity College, Cape Town
+ * 03/07/2023
+ * PROG5121 Project Part 3
+ */
+
 public class runLogin {
 
 	public static void main(String[] args) {
@@ -148,13 +156,8 @@ public class runLogin {
 						JOptionPane.showMessageDialog(null, "Welcome! Please login with your details.", null,
 								JOptionPane.PLAIN_MESSAGE);
 
-						String targetUsername = "Dean_";
-						String targetPassword = "Dean123!";
-
-						// String targetUsername = JOptionPane.showInputDialog("Please enter your
-						// username.", null);
-						// String targetPassword = JOptionPane.showInputDialog("Please enter your
-						// password.", null);
+						String targetUsername = JOptionPane.showInputDialog("Please enter your username.", null);
+						String targetPassword = JOptionPane.showInputDialog("Please enter your password.", null);
 
 						for (Login searchArray : accountList) {
 
