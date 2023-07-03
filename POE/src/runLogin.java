@@ -353,7 +353,6 @@ public class runLogin {
 						} catch (NumberFormatException e) {
 							if (totalTasks == null) {
 								
-							}
 							JOptionPane.showMessageDialog(null, "You need to enter a number. \nPlease try again!");
 							break;
 						}
