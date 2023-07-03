@@ -97,12 +97,15 @@ public class runLogin {
 		 * true. The three menu's conditions are dependent on the variable,
 		 * "application", which is determined on the user's input and selection of
 		 * options.
+		 * 
 		 * The first menu, is for the user deciding whether to login, register or quit.
 		 * Once the user has logged in successfully, the user will be directed to the
 		 * second menu.
+		 * 
 		 * The second menu, offers the user to, edit their account, continue to
 		 * EasyKanban or to logout. If the user selects, EasyKanban, they will then
 		 * continue to the third menu.
+		 * 
 		 * The third menu, contains all the "Task" operations. The user may, show the
 		 * report of all the captured tasks, search for a task, delete a task, or the
 		 * user may go back to the second menu. If the user wishes to quit the
@@ -114,6 +117,19 @@ public class runLogin {
 		application = 0;
 		status = false;
 		menu = true;
+
+		/**
+		 * This while-loop (menu) will run until the user has "Quit" the application.
+		 * The user is given options to either Login, Register, Display accounts or
+		 * Quit. If the user already has an account registered they may select Login,
+		 * which will return an integer that gets passed to a switch statement. If they
+		 * select register, they will be required to enter their first name, last name,
+		 * username, and password. Their account will be successfully registered if
+		 * their username and password meet the requirements. Once the user has
+		 * successfully logged in, the boolean 'status' will be set to true and the
+		 * integer variable, 'application' will be set to 1. Enabling the user to
+		 * continue to the next menu.
+		 */
 
 		while (menu) {
 
@@ -218,6 +234,25 @@ public class runLogin {
 						break;
 
 				} // End of switch statement
+
+				/**
+				 * This is the second menu where the user is taken to after a successful login.
+				 * The user has the options to edit their account details, continue to
+				 * EasyKanban or Logout.
+				 * 
+				 * If the user selects 'edit account' an integer is
+				 * returned and passed to a switch statement, where they will have more options
+				 * to select. On any of the options the user selects, a set method is used to
+				 * update their new details. If the user wishes to change their password, they
+				 * will still need to meet the password requirements. The user may also be
+				 * allowed to delete their account, which removes that object from the array
+				 * list, indexed at the correct position using a variable called, 'index' which
+				 * is set when the user successfully logs in.
+				 * 
+				 * The other option, EasyKanban, will set, application to 2, break out of the
+				 * switch statement and direct the user to the next menu, EasyKanban.
+				 * The Logout option, sets application back to 1, and status to false.
+				 */
 
 			} // WHILE LOOP Ending for (application == 0)
 
@@ -324,6 +359,20 @@ public class runLogin {
 
 				}
 
+				/**
+				 * This while loop is for the EasyKanban menu. The user has four options:
+				 * 
+				 * Add Task, which allows the user to enter as many tasks as they would like.
+				 * 
+				 * Show Report, this function displays all the tasks that have been captured,
+				 * excluding the tasks that have been deleted, or unsuccessfully added.
+				 * 
+				 * More, this option allows the user to search for specific tasks via the task
+				 * name, developer name, task status, which will then display the task details.
+				 * The user may also delete a task or display the task with the longest
+				 * duration.
+				 */
+
 			} // WHILE LOOP Ending for (application == 1)
 
 			if (application == 2) {
@@ -340,6 +389,33 @@ public class runLogin {
 				// String[] menu4 = { "Add Task", "Show Report", "More", "Back" };
 				switch (mode) {
 
+					/**
+					 * If the user has selected "Add Task", the following operations will take
+					 * place.
+					 * 
+					 * The task number will be set to the number of tasks that have been captured +
+					 * 1, so that the the task number will be indexed as the last element of the
+					 * array list, taskList. totalTasks will be initialized as it will be set with
+					 * the user's input. A try and catch is used to catch the
+					 * "NumberFormatException" which is if the user inputs a string rather than a
+					 * number.
+					 * 
+					 * Once the user has successfully inputed the number of tasks they would like to
+					 * add, a for loop will be executed. It will iterate until the counter variable
+					 * is equal to the number of tasks the user would like to add.
+					 * 
+					 * At the start of the for loop, an object of "Task" will be created, which will
+					 * be used to set the attributes of that object. The user will be prompt with a
+					 * few required inputs for each task, such as the task name, task description,
+					 * who the task is assigned to, the task duration, and the task status.
+					 * 
+					 * If the user has successfully inputed all the details of the task, and the
+					 * task description meets the requirements, that object of "Task" will be added
+					 * to the array list of type "Task", or else if the user has unsuccessfully
+					 * added a task, all the tasks that were previously added correctly will remain
+					 * captured, but the for loop will break and the user will have to add the tasks
+					 * that were not captured.
+					 */
 					case 0: // Add Task
 
 						taskNumber = taskList.get(taskList.size() - 1).getTaskNumber() + 1;
@@ -351,8 +427,7 @@ public class runLogin {
 									JOptionPane.showInputDialog(
 											"Please enter the number of tasks you would like to add:"));
 						} catch (NumberFormatException e) {
-							if (totalTasks == null) {
-								
+
 							JOptionPane.showMessageDialog(null, "You need to enter a number. \nPlease try again!");
 							break;
 						}
@@ -433,6 +508,13 @@ public class runLogin {
 						JOptionPane.showMessageDialog(null, displayTasks + "\nTotal Hours = " + totalHours + " Hours");
 						break;
 
+					/**
+					 * This case will display all the captured tasks, excluding the ones that have
+					 * been deleted. It starts by setting the displayTasks string to a new heading.
+					 * The for loop will iterate through the entire array list called taskList,
+					 * temporarily store it in "searchArray", add that string to "displayTasks" and
+					 * then uses JOptionPane to display that string.
+					 */
 					case 1: // Show Report
 
 						displayTasks = "Captured Tasks: \n";
@@ -446,13 +528,17 @@ public class runLogin {
 						JOptionPane.showMessageDialog(null, displayTasks + "\nTotal Hours = " + totalHours + " Hours");
 						break;
 
+					/**
+					 * In this case, the option "More" has been selected and this is where all the
+					 * functions for manipulating the existing tasks is executed. The user may
+					 * select either "Search for a Task" or "Delete a Task".
+					 */
 					case 2: // More
 
 						mode = JOptionPane.showOptionDialog(null, "What would you like to do?", "Select one:", 0, 1,
 								null,
 								menu5, null);
 
-						// String[] menu5 = { "Search for a Task", "Delete a Task", "Cancel" };
 						switch (mode) {
 
 							case 0: // Search for Task
@@ -461,8 +547,23 @@ public class runLogin {
 										null,
 										menu6, null);
 
-								// String[] menu6 = { "Developer", "Task Name", "Status", "Longest Duration",
-								// "Cancel" };
+								/**
+								 * The user has selected "Search for a Task", and now has the options to select
+								 * in what way they would like to search for a task. In either of the cases,
+								 * they all search for tasks in the same way.
+								 * 
+								 * The string arrays are initialized with the size of the "taskList", it then
+								 * iterates through the array list with a for loop and populates the string
+								 * array, depening on the selection of how the user would like to search for a
+								 * task.
+								 * 
+								 * Once the string array is populated, it is used in JOptionPane to
+								 * display a drop down menu so the user may select all the existing options.
+								 * Their selection is then stored in a string, and that string is then compared
+								 * to every element in the array list. If the two strings are equal, then all
+								 * the attributes of that element in the array list is stored in a string. That
+								 * string is then used to display all the task details.
+								 */
 								switch (mode) {
 
 									case 0: // Developer
@@ -483,13 +584,11 @@ public class runLogin {
 											break;
 										}
 
-										displayTasks = "Developer Name: " + searchDev + "\n";
+										displayTasks = "";
 
 										for (Task searchArray : taskList) {
 											if (searchArray.getDevName().equals(searchDev)) {
-												displayTasks = displayTasks + "\nTask Name: "
-														+ searchArray.getTaskName()
-														+ "\nTask Status: " + searchArray.getTaskStatus() + "\n";
+												displayTasks = displayTasks + searchArray.printTaskDetails() + "\n";
 											}
 										}
 
@@ -513,12 +612,11 @@ public class runLogin {
 											break;
 										}
 
-										displayTasks = "Task Name: " + searchTask + "\n";
+										displayTasks = "";
 
 										for (Task searchArray : taskList) {
 											if (searchArray.getTaskName().equals(searchTask)) {
-												displayTasks = displayTasks + "\nDeveloper: " + searchArray.getDevName()
-														+ "\nTask Status: " + searchArray.getTaskStatus() + "\n";
+												displayTasks = displayTasks + searchArray.printTaskDetails() + "\n";
 											}
 										}
 
@@ -536,20 +634,31 @@ public class runLogin {
 											break;
 										}
 
-										displayTasks = "Tasks with the status: " + searchStatus + "\n";
+										displayTasks = "";
 
 										for (Task searchArray : taskList) {
 											if (searchArray.getTaskStatus().equals(searchStatus)) {
-												displayTasks = displayTasks + "\nDeveloper: " + searchArray.getDevName()
-														+ "\nTask Name: " + searchArray.getTaskName()
-														+ "\nTask Duration: "
-														+ searchArray.getTaskHours() + "\n";
+												displayTasks = displayTasks + searchArray.printTaskDetails() + "\n";
 											}
 										}
 
 										JOptionPane.showMessageDialog(null, displayTasks);
 										break;
 
+									/**
+									 * To calculate the longest duration, two temporary variables are intialized. A
+									 * variable to hold the largest amount of hours as a integer, and the other
+									 * variable to hold the index of that task in the array list.
+									 * 
+									 * The for loop iterates through the entire array list, comparing the duration
+									 * of each task to the max hours and if it is greater than the max then it
+									 * stores the new max in the temp variable, "highestHours" and the index of that
+									 * element, "tempIndex" is set to i.
+									 * 
+									 * Once the entire array list has been looped through,
+									 * the task with the longest duration's index is stored in "tempIndex" and the
+									 * taskList then gets the task's details with "tempIndex" and displays it.
+									 */
 									case 3: // Longest Duration
 
 										int highestHours = 0;
@@ -563,12 +672,7 @@ public class runLogin {
 												tempIndex = i;
 											}
 										}
-
-										displayTasks = displayTasks + "\nDeveloper: "
-												+ taskList.get(tempIndex).getDevName()
-												+ "\nTask Name: " + taskList.get(tempIndex).getTaskName()
-												+ "\nTask Duration: "
-												+ taskList.get(tempIndex).getTaskHours();
+										displayTasks = displayTasks + taskList.get(tempIndex).printTaskDetails();
 										JOptionPane.showMessageDialog(null, displayTasks);
 										break;
 
@@ -578,6 +682,21 @@ public class runLogin {
 								}
 								break;
 
+							/**
+							 * To delete a task, it is required to delete a task via the task name.
+							 * Therefore the string array taskName is initialized and populated by iterating
+							 * through the array list, taskList, and getting all the task names. The
+							 * taskName array is then used to display all the task names to the user for
+							 * their selection.
+							 * 
+							 * Once the user has selected what task they would like to
+							 * delete, the task name is returned as a string and stored in the string
+							 * called, "searchTask". The taskList is then iterated through starting at the
+							 * last element and going through to the first element, so that if there are any
+							 * dupicate tasks, all the tasks with that name are removed, because if the loop
+							 * starts at the first element, the array size is reduced and the last elements
+							 * are skipped.
+							 */
 							case 1: // Delete a Task
 
 								taskNames = new String[taskList.size()];
