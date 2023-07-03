@@ -135,7 +135,7 @@ public class runLogin {
 
 			while (application == 0) {
 
-				mode = JOptionPane.showOptionDialog(null, "Please select what you would like to do.", "Select one:", 0,
+				mode = JOptionPane.showOptionDialog(null, "What would you like to do?", null, 0,
 						1, null, menu1, null);
 
 				// String[] menu1 = { "Login", "Register", "Quit", "Display Accounts" };
@@ -145,10 +145,16 @@ public class runLogin {
 
 						status = false;
 
-						JOptionPane.showMessageDialog(null, "Welcome! Please login with your details.");
+						JOptionPane.showMessageDialog(null, "Welcome! Please login with your details.", null,
+								JOptionPane.PLAIN_MESSAGE);
 
-						String targetUsername = JOptionPane.showInputDialog("Please enter your username.", null);
-						String targetPassword = JOptionPane.showInputDialog("Please enter your password.", null);
+						String targetUsername = "Dean_";
+						String targetPassword = "Dean123!";
+
+						// String targetUsername = JOptionPane.showInputDialog("Please enter your
+						// username.", null);
+						// String targetPassword = JOptionPane.showInputDialog("Please enter your
+						// password.", null);
 
 						for (Login searchArray : accountList) {
 
@@ -162,9 +168,11 @@ public class runLogin {
 						}
 
 						if (status) {
-							JOptionPane.showMessageDialog(null, accountList.get(index).returnLoginStatus(status));
+							JOptionPane.showMessageDialog(null, accountList.get(index).returnLoginStatus(status), null,
+									JOptionPane.PLAIN_MESSAGE);
 						} else {
-							JOptionPane.showMessageDialog(null, user.returnLoginStatus(status));
+							JOptionPane.showMessageDialog(null, user.returnLoginStatus(status), null,
+									JOptionPane.PLAIN_MESSAGE);
 						}
 
 						break;
@@ -174,41 +182,47 @@ public class runLogin {
 						try {
 							user = new Login();
 
-							user.setFirstName(JOptionPane.showInputDialog("Enter your first name:", "Frist Name"));
+							user.setFirstName(JOptionPane.showInputDialog("Enter your First Name:", "First Name"));
 							if (user.getFirstName() == null) {
-								JOptionPane.showMessageDialog(null, "Canceled!", null, JOptionPane.PLAIN_MESSAGE);
 								break;
 							}
 
-							user.setLastName(JOptionPane.showInputDialog("Enter your last name:", "Last Name"));
+							user.setLastName(JOptionPane.showInputDialog("Enter your Last Name:", "Last Name"));
 							if (user.getLastName() == null) {
-								JOptionPane.showMessageDialog(null, "Canceled!", null, JOptionPane.PLAIN_MESSAGE);
 								break;
 							}
 
-							user.setUsername(JOptionPane.showInputDialog("Create your username:", "Username"));
+							user.setUsername(JOptionPane.showInputDialog("Create your Username:", "Username"));
 
 							while (!user.checkUsername()) {
 								JOptionPane.showMessageDialog(null, user.registerUser(), null,
 										JOptionPane.PLAIN_MESSAGE);
-								user.setUsername(JOptionPane.showInputDialog("Create your username:", "Username"));
+								user.setUsername(JOptionPane.showInputDialog("Create your Username:", "Username"));
 							}
 
-							JOptionPane.showMessageDialog(null, "Username successfully captured.", null,
+							JOptionPane.showMessageDialog(null, "Username Successfully Captured.", null,
 									JOptionPane.PLAIN_MESSAGE);
 
-							user.setPassword(JOptionPane.showInputDialog("Create your password:", "Password"));
+							user.setPassword(JOptionPane.showInputDialog("Create your Password:", "Password"));
 
 							while (!user.checkPasswordComplexity()) {
 								JOptionPane.showMessageDialog(null, user.registerUser(), null,
 										JOptionPane.PLAIN_MESSAGE);
-								user.setPassword(JOptionPane.showInputDialog("Create your password:", "Password"));
+								user.setPassword(JOptionPane.showInputDialog("Create your Password:", "Password"));
 							}
 
-							JOptionPane.showMessageDialog(null, "Password successfully captured.", null,
+							JOptionPane.showMessageDialog(null, "Password Successfully Captured.", null,
 									JOptionPane.PLAIN_MESSAGE);
 
 							JOptionPane.showMessageDialog(null, user.registerUser(), null, JOptionPane.PLAIN_MESSAGE);
+
+							/**
+							 * This catches the "NullPointerException" which occurs when the user selects
+							 * "Cancel" whilst entering the username or password. The exception occurs
+							 * because the username and password are checked to see if they meet the
+							 * requirements, but the username and password checks, can't check a "null"
+							 * string, which is what gets returned, if the user selects, "Cancel".
+							 */
 
 						} catch (NullPointerException e) {
 							break;
@@ -224,7 +238,7 @@ public class runLogin {
 
 					case 3: // Display Accounts
 
-						String displayAccounts = "Registered Accounts : \n" + "\n";
+						String displayAccounts = "Registered Accounts: \n" + "\n";
 
 						for (Login searchArray : accountList) {
 							displayAccounts = displayAccounts + searchArray.displayAccounts() + "\n";
@@ -259,7 +273,8 @@ public class runLogin {
 			while (application == 1) {
 
 				mode = JOptionPane.showOptionDialog(null,
-						"What would you like to do, " + accountList.get(index).getFirstName() + "?", "Select one:", 0,
+						"What would you like to do, " + accountList.get(index).getFirstName() + "?", null,
+						0,
 						1, null, menu2, null);
 
 				// String[] menu2 = { "Edit Account", "EasyKanban", "Logout" };
@@ -268,7 +283,7 @@ public class runLogin {
 					case 0: // Edit Account
 
 						mode = JOptionPane.showOptionDialog(null,
-								"Account Details: \n\n" + accountList.get(index).displayAccounts(), "Select an option.",
+								"Account Details: \n\n" + accountList.get(index).displayAccounts(), "Edit Account",
 								0,
 								1, null, menu3, null);
 
@@ -281,12 +296,12 @@ public class runLogin {
 								String tempFirstName = accountList.get(index).getFirstName();
 								accountList.get(index)
 										.setFirstName(
-												JOptionPane.showInputDialog("Please enter your new FIRST name:", null));
+												JOptionPane.showInputDialog("Please Enter your NEW First Name:", null));
 								if (accountList.get(index).getFirstName() == null) {
 									accountList.get(index).setFirstName(tempFirstName);
 									break;
 								}
-								JOptionPane.showMessageDialog(null, "First name successfully updated!", null,
+								JOptionPane.showMessageDialog(null, "First Name Successfully Updated!", null,
 										JOptionPane.PLAIN_MESSAGE);
 								break;
 
@@ -295,12 +310,12 @@ public class runLogin {
 								String tempLastName = accountList.get(index).getLastName();
 								accountList.get(index)
 										.setLastName(
-												JOptionPane.showInputDialog("Please enter your new LAST name:", null));
+												JOptionPane.showInputDialog("Please Enter your NEW Last Name:", null));
 								if (accountList.get(index).getLastName() == null) {
 									accountList.get(index).setLastName(tempLastName);
 									break;
 								}
-								JOptionPane.showMessageDialog(null, "Last name successfully updated!", null,
+								JOptionPane.showMessageDialog(null, "Last Name Successfully Updated!", null,
 										JOptionPane.PLAIN_MESSAGE);
 								break;
 
@@ -309,17 +324,17 @@ public class runLogin {
 								String tempPassword = accountList.get(index).getPassword();
 								try {
 									accountList.get(index)
-											.setPassword(JOptionPane.showInputDialog("Please enter your new PASSWORD:",
+											.setPassword(JOptionPane.showInputDialog("Please Enter your NEW Password:",
 													null));
 
 									while (!accountList.get(index).checkPasswordComplexity()) {
 										JOptionPane.showMessageDialog(null, accountList.get(index).registerUser(), null,
 												JOptionPane.PLAIN_MESSAGE);
 										accountList.get(index).setPassword(
-												JOptionPane.showInputDialog("Please enter your new PASSWORD:", null));
+												JOptionPane.showInputDialog("Please Enter your NEW Password:", null));
 									}
 
-									JOptionPane.showMessageDialog(null, "Password successfully updated!", null,
+									JOptionPane.showMessageDialog(null, "Password Successfully Updated!", null,
 											JOptionPane.PLAIN_MESSAGE);
 									break;
 
@@ -331,10 +346,11 @@ public class runLogin {
 								}
 							case 3: // Delete Account
 
-								if (JOptionPane.showConfirmDialog(null, "ARE YOU SURE?") == 0) {
+								if (JOptionPane.showConfirmDialog(null,
+										"Are you sure you want to \nDELETE your Account?") == 0) {
 
 									accountList.remove(index);
-									JOptionPane.showMessageDialog(null, "Your account has been deleted!", null,
+									JOptionPane.showMessageDialog(null, "Your Account has been Deleted!", null,
 											JOptionPane.PLAIN_MESSAGE);
 									status = false;
 									application = 0;
@@ -376,14 +392,15 @@ public class runLogin {
 			} // WHILE LOOP Ending for (application == 1)
 
 			if (application == 2) {
-				JOptionPane.showMessageDialog(null, "Welcome to EasyKanban!");
+				JOptionPane.showMessageDialog(null, "Welcome to EasyKanban!", null,
+						JOptionPane.PLAIN_MESSAGE);
 				displayTasks = "Task List";
 				totalHours = 0;
 			}
 
 			while (application == 2) {
 
-				mode = JOptionPane.showOptionDialog(null, "Please select an option.", "Select one:", 0, 1, null, menu4,
+				mode = JOptionPane.showOptionDialog(null, "EasyKanban", "Select an Option", 0, 1, null, menu4,
 						null);
 
 				// String[] menu4 = { "Add Task", "Show Report", "More", "Back" };
@@ -416,6 +433,7 @@ public class runLogin {
 					 * captured, but the for loop will break and the user will have to add the tasks
 					 * that were not captured.
 					 */
+
 					case 0: // Add Task
 
 						taskNumber = taskList.get(taskList.size() - 1).getTaskNumber() + 1;
@@ -425,10 +443,11 @@ public class runLogin {
 							// Number of tasks
 							totalTasks = Integer.parseInt(
 									JOptionPane.showInputDialog(
-											"Please enter the number of tasks you would like to add:"));
+											"Please Enter the Number of Tasks you would like to add:"));
 						} catch (NumberFormatException e) {
 
-							JOptionPane.showMessageDialog(null, "You need to enter a number. \nPlease try again!");
+							JOptionPane.showMessageDialog(null, "You need to Enter a Number, Please Try Again!", null,
+									JOptionPane.PLAIN_MESSAGE);
 							break;
 						}
 						displayTasks = "Captured Tasks: \n";
@@ -438,7 +457,7 @@ public class runLogin {
 							tasks = new Task();
 
 							// Task Name
-							tasks.setTaskName(JOptionPane.showInputDialog("Please enter the name of the task:", null));
+							tasks.setTaskName(JOptionPane.showInputDialog("Please Enter the Name of the Task:", null));
 							if (tasks.getTaskName() == null) {
 								break;
 							}
@@ -448,20 +467,21 @@ public class runLogin {
 
 							// Task Description and check if description is valid
 							tasks.setTaskDesc(
-									JOptionPane.showInputDialog("Enter a brief description of this task:", null));
+									JOptionPane.showInputDialog("Enter a brief Description of this Task:", null));
 							if (tasks.getTaskDesc() == null) {
 								break;
 							}
 
 							while (!tasks.checkTaskDescription()) {
 								JOptionPane.showMessageDialog(null,
-										"Please enter a task description of less than 50 characters");
+										"Please Enter a Task Description of less than 50 Characters.", null,
+										JOptionPane.PLAIN_MESSAGE);
 								tasks.setTaskDesc(
-										JOptionPane.showInputDialog("Enter a brief description of this task:"));
+										JOptionPane.showInputDialog("Enter a brief Description of this Task:"));
 							}
 
 							// Developers Name
-							tasks.setDevName(JOptionPane.showInputDialog("Enter the developer's name:", null));
+							tasks.setDevName(JOptionPane.showInputDialog("Enter the Developer's Name:", null));
 							if (tasks.getDevName() == null) {
 								break;
 							}
@@ -469,32 +489,42 @@ public class runLogin {
 							// Task Duration
 							try {
 								tasks.setTaskHours(Integer.parseInt(
-										JOptionPane.showInputDialog("Please enter the duration of the task (Hours):")));
+										JOptionPane.showInputDialog("Please Enter the Duration of the Task (Hours):")));
 							} catch (NumberFormatException e) {
-								JOptionPane.showMessageDialog(null, "You need to enter a number. \nPlease try again!");
+								JOptionPane.showMessageDialog(null, "You need to Enter a Number. \nPlease Try Again!",
+										null,
+										JOptionPane.PLAIN_MESSAGE);
 								break;
 							}
 
 							// Task ID + createTaskID
 							try {
 								tasks.setTaskID(tasks.createTaskID());
+
+								/**
+								 * A try and catch statement, for if the developer's name and the task name is
+								 * too short for the "createTaskID" method.
+								 */
+
 							} catch (StringIndexOutOfBoundsException e) {
 								JOptionPane.showMessageDialog(null,
-										"The task name must be atleast 2 characters,\nand the developer's name atleast 3 characters. \n"
-												+ "Please try again!");
+										"The Task Name must be atleast 2 Characters,\nand the Developer's Name atleast 3 Characters. \n"
+												+ "Please Try Again!",
+										null, JOptionPane.PLAIN_MESSAGE);
 								break;
 							}
 
 							// Task Status
 							tasks.setTaskStatus((String) JOptionPane.showInputDialog(null,
-									"Please select the status of the task", "Select One", JOptionPane.QUESTION_MESSAGE,
+									"Please Select the Status of the Task", "Select One", JOptionPane.QUESTION_MESSAGE,
 									null, statusOptions, statusOptions[0]));
 							if (tasks.getTaskStatus() == null) {
 								break;
 							}
 
 							// End of for loop and successful task added.
-							JOptionPane.showMessageDialog(null, "Task successfully captured");
+							JOptionPane.showMessageDialog(null, "Task Successfully Captured.", null,
+									JOptionPane.PLAIN_MESSAGE);
 							taskList.add(tasks);
 							taskNumber++;
 						}
@@ -515,6 +545,7 @@ public class runLogin {
 					 * temporarily store it in "searchArray", add that string to "displayTasks" and
 					 * then uses JOptionPane to display that string.
 					 */
+
 					case 1: // Show Report
 
 						displayTasks = "Captured Tasks: \n";
@@ -525,7 +556,8 @@ public class runLogin {
 							displayTasks = displayTasks + "\n" + searchArray.printTaskDetails() + "\n";
 
 						}
-						JOptionPane.showMessageDialog(null, displayTasks + "\nTotal Hours = " + totalHours + " Hours");
+						JOptionPane.showMessageDialog(null, displayTasks + "\nTotal Hours = " + totalHours + " Hours",
+								null, JOptionPane.PLAIN_MESSAGE);
 						break;
 
 					/**
@@ -533,19 +565,18 @@ public class runLogin {
 					 * functions for manipulating the existing tasks is executed. The user may
 					 * select either "Search for a Task" or "Delete a Task".
 					 */
+
 					case 2: // More
 
-						mode = JOptionPane.showOptionDialog(null, "What would you like to do?", "Select one:", 0, 1,
-								null,
-								menu5, null);
+						mode = JOptionPane.showOptionDialog(null, "What would you like to do?", "Select an Option", 0,
+								1, null, menu5, null);
 
 						switch (mode) {
 
 							case 0: // Search for Task
 
-								mode = JOptionPane.showOptionDialog(null, "Search for a task by:", "Select one:", 0, 1,
-										null,
-										menu6, null);
+								mode = JOptionPane.showOptionDialog(null, "Search for a Task by:", "Select an Option",
+										0, 1, null, menu6, null);
 
 								/**
 								 * The user has selected "Search for a Task", and now has the options to select
@@ -564,6 +595,7 @@ public class runLogin {
 								 * the attributes of that element in the array list is stored in a string. That
 								 * string is then used to display all the task details.
 								 */
+
 								switch (mode) {
 
 									case 0: // Developer
@@ -576,7 +608,7 @@ public class runLogin {
 										}
 
 										String searchDev = (String) JOptionPane.showInputDialog(null,
-												"Please enter the Developer's name:", "Select One",
+												"Please select the Developer's Name:", "Select an Option",
 												JOptionPane.QUESTION_MESSAGE,
 												null, developer, developer[0]);
 
@@ -584,15 +616,18 @@ public class runLogin {
 											break;
 										}
 
-										displayTasks = "";
+										displayTasks = "Tasks Assigned to: " + searchDev + "\n";
 
 										for (Task searchArray : taskList) {
 											if (searchArray.getDevName().equals(searchDev)) {
-												displayTasks = displayTasks + searchArray.printTaskDetails() + "\n";
+												displayTasks = displayTasks + "\nTask Name: "
+														+ searchArray.getTaskName() + "\nTask Status: "
+														+ searchArray.getTaskStatus() + "\n";
 											}
 										}
 
-										JOptionPane.showMessageDialog(null, displayTasks);
+										JOptionPane.showMessageDialog(null, displayTasks, null,
+												JOptionPane.PLAIN_MESSAGE);
 										break;
 
 									case 1: // Task Name
@@ -605,28 +640,31 @@ public class runLogin {
 										}
 
 										String searchTask = (String) JOptionPane.showInputDialog(null,
-												"Please select the task name to be deleted:", "Select One",
+												"Please select the Task's Name:", "Select an Option",
 												JOptionPane.QUESTION_MESSAGE, null, taskNames, taskNames[0]);
 
 										if (searchTask == null) {
 											break;
 										}
 
-										displayTasks = "";
+										displayTasks = "Tasks with Task Name: " + searchTask + "\n";
 
 										for (Task searchArray : taskList) {
 											if (searchArray.getTaskName().equals(searchTask)) {
-												displayTasks = displayTasks + searchArray.printTaskDetails() + "\n";
+												displayTasks = displayTasks + "\nDeveloper: "
+														+ searchArray.getDevName() + "\nTask Status: "
+														+ searchArray.getTaskStatus() + "\n";
 											}
 										}
 
-										JOptionPane.showMessageDialog(null, displayTasks);
+										JOptionPane.showMessageDialog(null, displayTasks, null,
+												JOptionPane.PLAIN_MESSAGE);
 										break;
 
 									case 2: // Status
 
 										String searchStatus = (String) JOptionPane.showInputDialog(null,
-												"Please select the status of the task", "Select One",
+												"Please select the Status of the Task:", "Select an Option",
 												JOptionPane.QUESTION_MESSAGE,
 												null, statusOptions, statusOptions[0]);
 
@@ -634,15 +672,19 @@ public class runLogin {
 											break;
 										}
 
-										displayTasks = "";
+										displayTasks = "Tasks with the Status: " + searchStatus + "\n";
 
 										for (Task searchArray : taskList) {
 											if (searchArray.getTaskStatus().equals(searchStatus)) {
-												displayTasks = displayTasks + searchArray.printTaskDetails() + "\n";
+												displayTasks = displayTasks + "\nDeveloper: "
+														+ searchArray.getDevName() + "\nTask Name: "
+														+ searchArray.getTaskName() + "\nTask Duration: "
+														+ searchArray.getTaskHours() + " Hours\n";
 											}
 										}
 
-										JOptionPane.showMessageDialog(null, displayTasks);
+										JOptionPane.showMessageDialog(null, displayTasks, null,
+												JOptionPane.PLAIN_MESSAGE);
 										break;
 
 									/**
@@ -659,12 +701,13 @@ public class runLogin {
 									 * the task with the longest duration's index is stored in "tempIndex" and the
 									 * taskList then gets the task's details with "tempIndex" and displays it.
 									 */
+
 									case 3: // Longest Duration
 
 										int highestHours = 0;
 										int tempIndex = 0;
 
-										displayTasks = "Task with the longest duration: " + "\n";
+										displayTasks = "Task with Longest Duration: " + "\n";
 
 										for (int i = 0; i < taskList.size(); i++) {
 											if (taskList.get(i).getTaskHours() > highestHours) {
@@ -672,8 +715,11 @@ public class runLogin {
 												tempIndex = i;
 											}
 										}
-										displayTasks = displayTasks + taskList.get(tempIndex).printTaskDetails();
-										JOptionPane.showMessageDialog(null, displayTasks);
+										displayTasks = displayTasks + "\nDeveloper: "
+												+ taskList.get(tempIndex).getDevName() + "\nTask Duration: "
+												+ taskList.get(tempIndex).getTaskHours() + " Hours";
+										JOptionPane.showMessageDialog(null, displayTasks, null,
+												JOptionPane.PLAIN_MESSAGE);
 										break;
 
 									case 4: // Cancel
@@ -697,6 +743,7 @@ public class runLogin {
 							 * starts at the first element, the array size is reduced and the last elements
 							 * are skipped.
 							 */
+
 							case 1: // Delete a Task
 
 								taskNames = new String[taskList.size()];
@@ -706,7 +753,7 @@ public class runLogin {
 									taskNames[i] = taskList.get(i).getTaskName();
 								}
 								String searchTask = (String) JOptionPane.showInputDialog(null,
-										"Please select the task name to be deleted:", "Select One",
+										"Please Select the Task Name to be Deleted:", "Select an Option",
 										JOptionPane.QUESTION_MESSAGE, null, taskNames, taskNames[0]);
 
 								if (searchTask == null) {
@@ -720,7 +767,8 @@ public class runLogin {
 									}
 								}
 
-								JOptionPane.showMessageDialog(null, "Entry '" + searchTask + "' successfully deleted!");
+								JOptionPane.showMessageDialog(null, "Entry '" + searchTask + "' Successfully Deleted!",
+										null, JOptionPane.PLAIN_MESSAGE);
 								break;
 
 							case 2: // Cancel

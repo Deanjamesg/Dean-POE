@@ -146,7 +146,7 @@ public class Login {
 		if (status) {
 			loginMessage = "Welcome " + firstName + ", " + lastName + " it is great to see you again.";
 		} else {
-			loginMessage = "Username or password incorrect, please try again.";
+			loginMessage = "Username or Password incorrect, please try again.";
 		}
 
 		return loginMessage;
@@ -155,7 +155,7 @@ public class Login {
 
 	public String displayAccounts() {
 
-		String displayAccount = "Frist name: " + firstName + "\n" + "Last name: " + lastName + "\n" + "Username: "
+		String displayAccount = "First Name: " + firstName + "\n" + "Last Name: " + lastName + "\n" + "Username: "
 				+ username + "\n" + "Password: " + password + "\n";
 
 		return displayAccount;
